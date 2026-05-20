@@ -174,6 +174,17 @@ TEXTOS = {
 # ─────────────────────────────────────────────────────────────────────────────
 
 # ── Selector d'idioma ──
+st.markdown("""
+<style>
+    div[data-testid="stSelectbox"]:first-of-type div[data-baseweb="select"] > div {
+        background-color: #1a3a7a !important;
+        color: #ffffff !important;
+        border: 1px solid #2a5090 !important;
+        border-radius: 8px !important;
+    }
+    div[data-testid="stSelectbox"]:first-of-type svg { fill: #ffffff !important; }
+</style>
+""", unsafe_allow_html=True)
 idioma = st.selectbox("", ["CA", "ES", "EN"], label_visibility="collapsed")
 T_ = TEXTOS[idioma]
 
