@@ -20,25 +20,40 @@ st.set_page_config(
     layout="centered"
 )
 
-# ── CSS nàutic ──
+# ── CSS fosc nàutic ──
 st.markdown("""
 <style>
-    .stApp { background-color: #f0f4f8; }
-    h1 { color: #003366 !important; font-family: 'Georgia', serif; }
-    h2, h3 { color: #003366 !important; }
+    .stApp { background-color: #0a1628 !important; }
+    section[data-testid="stMain"] { background-color: #0a1628 !important; }
+    .stApp * { color: #e8edf5; }
+    h1, h2, h3 { color: #ffffff !important; font-family: 'Georgia', serif; }
+    label, .stSelectbox label, .stNumberInput label {
+        color: #a8b8d0 !important; font-size: 13px !important;
+    }
     .stButton > button {
-        background-color: #003366 !important;
+        background-color: #1a56db !important;
         color: white !important;
         border-radius: 8px !important;
         font-size: 18px !important;
         font-weight: bold !important;
         padding: 12px !important;
+        border: none !important;
+        width: 100% !important;
     }
-    .stButton > button:hover { background-color: #0055a5 !important; }
+    .stButton > button:hover { background-color: #2563eb !important; }
+    .stNumberInput input, .stSelectbox div[data-baseweb="select"] {
+        background-color: #ffffff !important;
+        color: #111 !important;
+        border-radius: 6px !important;
+    }
+    .stAlert { border-radius: 8px !important; }
     .footer {
-        text-align: center; color: #888; font-size: 11px;
-        margin-top: 30px; padding-top: 15px; border-top: 1px solid #ddd;
+        text-align: center; color: #6b7a99; font-size: 11px;
+        margin-top: 30px; padding-top: 15px; border-top: 1px solid #1e3a5f;
     }
+    hr { border-color: #1e3a5f !important; }
+    .stMetric { background-color: #0f2040 !important; border-radius: 8px; padding: 8px; }
+    .stExpanderHeader { color: #a8b8d0 !important; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -158,41 +173,44 @@ TEXTOS = {
 # CAPÇALERA AMB LOGOS I SELECTOR D'IDIOMA
 # ─────────────────────────────────────────────────────────────────────────────
 
-col_logo1, col_titol, col_logo2 = st.columns([1, 5, 1])
-with col_logo1:
-    try:
-        st.image("escut.png", width=70)
-    except:
-        st.write("🏛️")
-with col_titol:
-    idioma = st.selectbox("", ["CA", "ES", "EN"], label_visibility="collapsed")
-    T_ = TEXTOS[idioma]
-    st.markdown(f"""
-    <div style='text-align:center; padding:5px 0;'>
-        <span style='font-size:26px; font-weight:bold; color:#003366;'>
-            ⚓ {T_['titol']}
-        </span><br>
-        <span style='font-size:12px; color:#555;'>{T_['subtitol']}</span>
-    </div>
-    """, unsafe_allow_html=True)
-with col_logo2:
-    try:
-        st.image("Logo_UPC.png", width=70)
-    except:
-        st.write("🎓")
+# ── Selector d'idioma ──
+idioma = st.selectbox("", ["CA", "ES", "EN"], label_visibility="collapsed")
+T_ = TEXTOS[idioma]
 
-st.markdown(
-    f"<p style='text-align:center;color:#555;font-size:13px;margin-top:5px;'>"
-    f"{T_['descripcio']}</p>",
-    unsafe_allow_html=True
-)
-st.divider()
+# ── Header fosc amb etiquetes ──
+st.markdown(f"""
+<div style="background: linear-gradient(135deg, #0f2554 0%, #1a3a7a 100%);
+            border-radius: 12px; padding: 28px 32px; margin-bottom: 24px;
+            border: 1px solid #1e4080;">
+    <p style="color:#7eb3e8; font-size:11px; font-weight:600;
+              letter-spacing:2px; margin:0 0 8px 0;">NÀUTICA · UPC</p>
+    <h1 style="color:#ffffff !important; font-size:28px; font-weight:800;
+               margin:0 0 6px 0; font-family:'Georgia',serif;">
+        {T_['titol']}
+    </h1>
+    <p style="color:#a8c4e0; font-size:13px; margin:0 0 12px 0;">
+        {T_['subtitol']}
+    </p>
+    <p style="color:#c8d8ea; font-size:13px; margin:0 0 16px 0;">
+        {T_['descripcio']}
+    </p>
+    <span style="background:#1a4080; color:#7eb3e8; border:1px solid #2a5090;
+                 border-radius:20px; padding:4px 12px; font-size:11px;
+                 font-weight:600; margin-right:8px;">ISO 12215-5</span>
+    <span style="background:#1a4080; color:#7eb3e8; border:1px solid #2a5090;
+                 border-radius:20px; padding:4px 12px; font-size:11px;
+                 font-weight:600; margin-right:8px;">IAP-11</span>
+    <span style="background:#1a4080; color:#7eb3e8; border:1px solid #2a5090;
+                 border-radius:20px; padding:4px 12px; font-size:11px;
+                 font-weight:600;">TFM 2024</span>
+</div>
+""", unsafe_allow_html=True)
 
 # ─────────────────────────────────────────────────────────────────────────────
 # BLOC 1 · DADES D'ENTRADA
 # ─────────────────────────────────────────────────────────────────────────────
 
-st.subheader(T_["dades"])
+st.markdown(f"<p style='color:#7eb3e8; font-size:11px; font-weight:600; letter-spacing:2px; margin:0 0 12px 0;'>{T_['dades'].replace('📋 ', '').upper()}</p>", unsafe_allow_html=True)
 
 col1, col2 = st.columns(2)
 with col1:
@@ -212,7 +230,7 @@ with col2:
                                disabled=(tipus == "VELER"),
                                help=T_["ajuda_potencia"])
 
-st.divider()
+st.markdown("<div style='margin-top:16px'></div>", unsafe_allow_html=True)
 
 # ─────────────────────────────────────────────────────────────────────────────
 # CÀLCULS
