@@ -335,22 +335,10 @@ if st.button(T_["calcular"], use_container_width=True):
         <div style="background:rgba(180,30,30,0.12); border:1px solid rgba(210,60,60,0.3);
                     border-radius:10px; padding:16px 20px; color:#ff8a80;
                     font-size:0.86rem; line-height:1.6; margin-bottom:12px;">
-            ⚠️ {T_['error_rang'].format(lwl=Lwl)}
+            &#9888;&#65039; {T_['error_rang'].format(lwl=Lwl)}
         </div>
-        <a href="{mailto}" target="_blank" style="
-            display:inline-block;
-            background:rgba(0,50,150,0.3);
-            border:1px solid rgba(70,130,255,0.35);
-            border-radius:8px;
-            padding:10px 20px;
-            color:#7ab8ff;
-            font-size:0.83rem;
-            font-weight:600;
-            text-decoration:none;
-            letter-spacing:0.04em;">
-            📧 {T_['reportar']}
-        </a>
         """, unsafe_allow_html=True)
+        st.link_button("📧 " + T_["reportar"], mailto)
         st.stop()
 
     z = (2/3) * T;  b = Lwl / 4;  h = z / 2
