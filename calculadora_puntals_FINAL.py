@@ -198,6 +198,7 @@ TEXTOS = {
         "reportar": "Reportar aquest error al gestor de l'app",
         "email_assumpte": "Error Calculadora Puntals - Dades fora de rang",
         "email_cos": "Bon dia,\n\nS'ha produit un error en introduir les dades seguents:\n- Lwl = {lwl:.2f} m\n- Bc = {bc:.2f} m\n- T = {t:.2f} m\n- Tipus: {tipus}\n\nMissatge: mLDC <= 0 (fora del rang ISO 12215-5)\n\nGracies.",
+        "camps_buits": "⚠️ Ompliu tots els camps obligatoris (Lwl, Bc i T) abans de calcular.",
     },
     "ES": {
         "titol": "Calculadora de Puntales de Varada",
@@ -230,6 +231,7 @@ TEXTOS = {
         "reportar": "Reportar este error al gestor de la app",
         "email_assumpte": "Error Calculadora Puntales - Datos fuera de rango",
         "email_cos": "Buenos dias,\n\nSe ha producido un error al introducir los siguientes datos:\n- Lwl = {lwl:.2f} m\n- Bc = {bc:.2f} m\n- T = {t:.2f} m\n- Tipo: {tipus}\n\nMensaje: mLDC <= 0 (fuera del rango ISO 12215-5)\n\nGracias.",
+        "camps_buits": "⚠️ Rellened todos los campos obligatorios (Lwl, Bc y T) antes de calcular.",
     },
     "EN": {
         "titol": "Boat Docking Support Calculator",
@@ -262,6 +264,7 @@ TEXTOS = {
         "reportar": "Report this error to the app manager",
         "email_assumpte": "Error Boat Support Calculator - Data out of range",
         "email_cos": "Hello,\n\nAn error occurred with the following input data:\n- Lwl = {lwl:.2f} m\n- Bc = {bc:.2f} m\n- T = {t:.2f} m\n- Type: {tipus}\n\nMessage: mLDC <= 0 (out of ISO 12215-5 range)\n\nThank you.",
+        "camps_buits": "⚠️ Please fill in all required fields (Lwl, Bc and T) before calculating.",
     }
 }
 
@@ -290,19 +293,32 @@ st.markdown(f'<div class="sec-label">{T_["dades"]}</div>', unsafe_allow_html=Tru
 
 col1, col2 = st.columns(2, gap="large")
 with col1:
-    Lwl = st.number_input(T_["lwl"], min_value=2.5, max_value=24.5, value=12.35, step=0.01, help=T_["ajuda_lwl"])
-    Bc  = st.number_input(T_["bc"],  min_value=1.0, max_value=10.0, value=4.20,  step=0.01, help=T_["ajuda_bc"])
-    T   = st.number_input(T_["t"],   min_value=0.3, max_value=5.0,  value=2.10,  step=0.01, help=T_["ajuda_t"])
+    Lwl = st.number_input(T_["lwl"], min_value=2.5, max_value=24.5, value=None, placeholder="ex: 12.35", step=0.01, help=T_["ajuda_lwl"])
+    Bc  = st.number_input(T_["bc"],  min_value=1.0, max_value=10.0, value=None, placeholder="ex: 4.20",  step=0.01, help=T_["ajuda_bc"])
+    T   = st.number_input(T_["t"],   min_value=0.3, max_value=5.0,  value=None, placeholder="ex: 2.10",  step=0.01, help=T_["ajuda_t"])
 with col2:
     tipus_sel = st.selectbox(T_["tipus"], options=[T_["motora"], T_["veler"]], index=1, help=T_["ajuda_tipus"])
     tipus = "MOTORA" if tipus_sel == T_["motora"] else "VELER"
-    Potencia = st.number_input(T_["potencia"], min_value=0.0, max_value=5000.0, value=29.44, step=1.0,
+    Potencia = st.number_input(T_["potencia"], min_value=0.0, max_value=5000.0, value=None, placeholder="ex: 29.44", step=1.0,
                                disabled=(tipus == "VELER"), help=T_["ajuda_potencia"])
 
 st.markdown("<div style='height:10px'></div>", unsafe_allow_html=True)
 
 # ── CALCULAR ──
 if st.button(T_["calcular"], use_container_width=True):
+
+    if Lwl is None or Bc is None or T is None:
+        st.markdown(f"""
+        <div style="background:rgba(180,100,0,0.12); border:1px solid rgba(210,150,0,0.3);
+                    border-radius:10px; padding:14px 18px; color:#ffcc80;
+                    font-size:0.86rem; line-height:1.6;">
+            {T_['camps_buits']}
+        </div>
+        """, unsafe_allow_html=True)
+        st.stop()
+
+    if tipus == "MOTORA" and Potencia is None:
+        Potencia = 29.44
 
     Beta_04 = 30; x_Lwl = 0.6; Gz_max60 = 60; Cb = 0.23
     dens_as = 1.025; Kdc = 1.0; beta_coef = 0.1838
