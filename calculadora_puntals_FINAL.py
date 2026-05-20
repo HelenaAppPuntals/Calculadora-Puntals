@@ -199,6 +199,8 @@ TEXTOS = {
         "email_assumpte": "Error Calculadora Puntals - Dades fora de rang",
         "email_cos": "Bon dia,\n\nS'ha produ\u00eft un error en introduir les dades seg\u00fcents:\n- Lwl = {lwl:.2f} m\n- Bc = {bc:.2f} m\n- T = {t:.2f} m\n- Tipus: {tipus}\n\nMissatge: mLDC <= 0 (fora del rang ISO 12215-5)\n\nGr\u00e0cies.",
         "camps_buits": "⚠️ Ompliu tots els camps obligatoris (Lwl, Bc i T) abans de calcular.",
+        "btn_guia": "📄 Descarregar guia dels càlculs (PDF)",
+        "pdf_nom": "guia_calculs_CA.pdf",
     },
     "ES": {
         "titol": "Calculadora de Puntales de Varada",
@@ -232,6 +234,8 @@ TEXTOS = {
         "email_assumpte": "Error Calculadora Puntales - Datos fuera de rango",
         "email_cos": "Buenos d\u00edas,\n\nSe ha producido un error al introducir los siguientes datos:\n- Lwl = {lwl:.2f} m\n- Bc = {bc:.2f} m\n- T = {t:.2f} m\n- Tipo: {tipus}\n\nMensaje: mLDC <= 0 (fuera del rango ISO 12215-5)\n\nGracias.",
         "camps_buits": "⚠️ Rellened todos los campos obligatorios (Lwl, Bc y T) antes de calcular.",
+        "btn_guia": "📄 Descargar guía de los cálculos (PDF)",
+        "pdf_nom": "guia_calculs_ES.pdf",
     },
     "EN": {
         "titol": "Boat Docking Support Calculator",
@@ -265,6 +269,8 @@ TEXTOS = {
         "email_assumpte": "Error Boat Support Calculator - Data out of range",
         "email_cos": "Hello,\n\nAn error occurred with the following input data:\n- Lwl = {lwl:.2f} m\n- Bc = {bc:.2f} m\n- T = {t:.2f} m\n- Type: {tipus}\n\nMessage: mLDC <= 0 (out of ISO 12215-5 range)\n\nThank you.",
         "camps_buits": "⚠️ Please fill in all required fields (Lwl, Bc and T) before calculating.",
+        "btn_guia": "📄 Download calculation guide (PDF)",
+        "pdf_nom": "guia_calculs_EN.pdf",
     }
 }
 
@@ -303,6 +309,19 @@ with col2:
                                disabled=(tipus == "VELER"), help=T_["ajuda_potencia"])
 
 st.markdown("<div style='height:10px'></div>", unsafe_allow_html=True)
+
+# ── Botó descàrrega guia PDF ──
+try:
+    with open(T_["pdf_nom"], "rb") as f:
+        st.download_button(
+            label=T_["btn_guia"],
+            data=f.read(),
+            file_name=T_["pdf_nom"],
+            mime="application/pdf",
+            use_container_width=True,
+        )
+except FileNotFoundError:
+    pass
 
 # ── CALCULAR ──
 if st.button(T_["calcular"], use_container_width=True):
