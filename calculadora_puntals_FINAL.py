@@ -194,7 +194,10 @@ TEXTOS = {
         "ajuda_tipus": "Selecciona el tipus d'embarcació",
         "ajuda_potencia": "Només necessari per a motores",
         "footer": "Calculadora desenvolupada per Helena Maymí Ardèvol · TFM · Facultat de Nàutica de Barcelona · UPC · 2024 · Basat en ISO 12215-5 i IAP-11",
-        "error_rang": "⚠️ Dades fora de rang — Amb Lwl = {lwl:.2f} m, la massa de desplaçament estimada per la ISO 12215-5 (mLDC = 1369·Lwl − 7223.1) resulta zero o negativa. La normativa requereix una eslora mínima d'aproximadament 5.27 m per poder aplicar aquesta metodologia. Reviseu les dades introduïdes.",
+        "error_rang": "Dades fora de rang — Amb Lwl = {lwl:.2f} m, la massa de desplaçament estimada per la ISO 12215-5 (mLDC = 1369·Lwl - 7223.1) resulta zero o negativa. La normativa requereix una eslora minima d'aproximadament 5.27 m per poder aplicar aquesta metodologia. Reviseu les dades introduides.",
+        "reportar": "Reportar aquest error al gestor de l'app",
+        "email_assumpte": "Error Calculadora Puntals - Dades fora de rang",
+        "email_cos": "Bon dia,\n\nS'ha produit un error en introduir les dades seguents:\n- Lwl = {lwl:.2f} m\n- Bc = {bc:.2f} m\n- T = {t:.2f} m\n- Tipus: {tipus}\n\nMissatge: mLDC <= 0 (fora del rang ISO 12215-5)\n\nGracies.",
     },
     "ES": {
         "titol": "Calculadora de Puntales de Varada",
@@ -223,7 +226,10 @@ TEXTOS = {
         "ajuda_tipus": "Selecciona el tipo de embarcación",
         "ajuda_potencia": "Sólo necesario para motoras",
         "footer": "Calculadora desarrollada por Helena Maymí Ardèvol · TFM · Facultad de Náutica de Barcelona · UPC · 2024 · Basado en ISO 12215-5 e IAP-11",
-        "error_rang": "⚠️ Datos fuera de rango — Con Lwl = {lwl:.2f} m, la masa de desplazamiento estimada por la ISO 12215-5 (mLDC = 1369·Lwl − 7223.1) resulta cero o negativa. La normativa requiere una eslora mínima de aproximadamente 5.27 m para aplicar esta metodología. Revisad los datos introducidos.",
+        "error_rang": "Datos fuera de rango — Con Lwl = {lwl:.2f} m, la masa de desplazamiento estimada por la ISO 12215-5 (mLDC = 1369·Lwl - 7223.1) resulta cero o negativa. La normativa requiere una eslora minima de aproximadamente 5.27 m para aplicar esta metodologia. Revisad los datos introducidos.",
+        "reportar": "Reportar este error al gestor de la app",
+        "email_assumpte": "Error Calculadora Puntales - Datos fuera de rango",
+        "email_cos": "Buenos dias,\n\nSe ha producido un error al introducir los siguientes datos:\n- Lwl = {lwl:.2f} m\n- Bc = {bc:.2f} m\n- T = {t:.2f} m\n- Tipo: {tipus}\n\nMensaje: mLDC <= 0 (fuera del rango ISO 12215-5)\n\nGracias.",
     },
     "EN": {
         "titol": "Boat Docking Support Calculator",
@@ -252,7 +258,10 @@ TEXTOS = {
         "ajuda_tipus": "Select vessel type",
         "ajuda_potencia": "Only required for motorboats",
         "footer": "Calculator developed by Helena Maymi Ardèvol · TFM · Faculty of Nautical Sciences of Barcelona · UPC · 2024 · Based on ISO 12215-5 and IAP-11",
-        "error_rang": "⚠️ Data out of range — With Lwl = {lwl:.2f} m, the displacement mass estimated by ISO 12215-5 (mLDC = 1369·Lwl − 7223.1) is zero or negative. The standard requires a minimum waterline length of approximately 5.27 m to apply this methodology. Please review the input data.",
+        "error_rang": "Data out of range — With Lwl = {lwl:.2f} m, the displacement mass estimated by ISO 12215-5 (mLDC = 1369·Lwl - 7223.1) is zero or negative. The standard requires a minimum waterline length of approximately 5.27 m to apply this methodology. Please review the input data.",
+        "reportar": "Report this error to the app manager",
+        "email_assumpte": "Error Boat Support Calculator - Data out of range",
+        "email_cos": "Hello,\n\nAn error occurred with the following input data:\n- Lwl = {lwl:.2f} m\n- Bc = {bc:.2f} m\n- T = {t:.2f} m\n- Type: {tipus}\n\nMessage: mLDC <= 0 (out of ISO 12215-5 range)\n\nThank you.",
     }
 }
 
@@ -302,12 +311,29 @@ if st.button(T_["calcular"], use_container_width=True):
     mLDC = max(0.0, 1369 * Lwl - 7223.1)
 
     if mLDC <= 0:
+        import urllib.parse
+        assumpte = urllib.parse.quote(T_["email_assumpte"])
+        cos = urllib.parse.quote(T_["email_cos"].format(lwl=Lwl, bc=Bc, t=T, tipus=tipus))
+        mailto = f"https://mail.google.com/mail/?view=cm&to=puntals.varada@gmail.com&su={assumpte}&body={cos}"
         st.markdown(f"""
         <div style="background:rgba(180,30,30,0.12); border:1px solid rgba(210,60,60,0.3);
                     border-radius:10px; padding:16px 20px; color:#ff8a80;
-                    font-size:0.86rem; line-height:1.6;">
-            {T_['error_rang'].format(lwl=Lwl)}
+                    font-size:0.86rem; line-height:1.6; margin-bottom:12px;">
+            ⚠️ {T_['error_rang'].format(lwl=Lwl)}
         </div>
+        <a href="{mailto}" target="_blank" style="
+            display:inline-block;
+            background:rgba(0,50,150,0.3);
+            border:1px solid rgba(70,130,255,0.35);
+            border-radius:8px;
+            padding:10px 20px;
+            color:#7ab8ff;
+            font-size:0.83rem;
+            font-weight:600;
+            text-decoration:none;
+            letter-spacing:0.04em;">
+            📧 {T_['reportar']}
+        </a>
         """, unsafe_allow_html=True)
         st.stop()
 
