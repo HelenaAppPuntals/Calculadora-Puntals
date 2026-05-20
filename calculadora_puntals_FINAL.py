@@ -329,7 +329,8 @@ if st.button(T_["calcular"], use_container_width=True):
     if mLDC <= 0:
         import urllib.parse
         assumpte = urllib.parse.quote(T_["email_assumpte"], safe='', encoding='utf-8')
-        cos = urllib.parse.quote(T_["email_cos"].format(lwl=Lwl, bc=Bc, t=T, tipus=tipus), safe='\n', encoding='utf-8')
+        cos_text = T_["email_cos"].format(lwl=Lwl, bc=Bc, t=T, tipus=tipus)
+        cos = urllib.parse.quote(cos_text, safe='', encoding='utf-8').replace('%0A', '%0A')
         mailto = f"https://mail.google.com/mail/?view=cm&to=puntals.varada@gmail.com&su={assumpte}&body={cos}"
         st.markdown(f"""
         <div style="background:rgba(180,30,30,0.12); border:1px solid rgba(210,60,60,0.3);
