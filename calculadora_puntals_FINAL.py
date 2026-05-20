@@ -197,7 +197,7 @@ TEXTOS = {
         "error_rang": "Dades fora de rang — Amb Lwl = {lwl:.2f} m, la massa de desplaçament estimada per la ISO 12215-5 (mLDC = 1369·Lwl - 7223.1) resulta zero o negativa. La normativa requereix una eslora minima d'aproximadament 5.27 m per poder aplicar aquesta metodologia. Reviseu les dades introduides.",
         "reportar": "Reportar aquest error al gestor de l'app",
         "email_assumpte": "Error Calculadora Puntals - Dades fora de rang",
-        "email_cos": "Bon dia,\n\nS'ha produit un error en introduir les dades seguents:\n- Lwl = {lwl:.2f} m\n- Bc = {bc:.2f} m\n- T = {t:.2f} m\n- Tipus: {tipus}\n\nMissatge: mLDC <= 0 (fora del rang ISO 12215-5)\n\nGracies.",
+        "email_cos": "Bon dia,\n\nS'ha produ\u00eft un error en introduir les dades seg\u00fcents:\n- Lwl = {lwl:.2f} m\n- Bc = {bc:.2f} m\n- T = {t:.2f} m\n- Tipus: {tipus}\n\nMissatge: mLDC <= 0 (fora del rang ISO 12215-5)\n\nGr\u00e0cies.",
         "camps_buits": "⚠️ Ompliu tots els camps obligatoris (Lwl, Bc i T) abans de calcular.",
     },
     "ES": {
@@ -230,7 +230,7 @@ TEXTOS = {
         "error_rang": "Datos fuera de rango — Con Lwl = {lwl:.2f} m, la masa de desplazamiento estimada por la ISO 12215-5 (mLDC = 1369·Lwl - 7223.1) resulta cero o negativa. La normativa requiere una eslora minima de aproximadamente 5.27 m para aplicar esta metodologia. Revisad los datos introducidos.",
         "reportar": "Reportar este error al gestor de la app",
         "email_assumpte": "Error Calculadora Puntales - Datos fuera de rango",
-        "email_cos": "Buenos dias,\n\nSe ha producido un error al introducir los siguientes datos:\n- Lwl = {lwl:.2f} m\n- Bc = {bc:.2f} m\n- T = {t:.2f} m\n- Tipo: {tipus}\n\nMensaje: mLDC <= 0 (fuera del rango ISO 12215-5)\n\nGracias.",
+        "email_cos": "Buenos d\u00edas,\n\nSe ha producido un error al introducir los siguientes datos:\n- Lwl = {lwl:.2f} m\n- Bc = {bc:.2f} m\n- T = {t:.2f} m\n- Tipo: {tipus}\n\nMensaje: mLDC <= 0 (fuera del rango ISO 12215-5)\n\nGracias.",
         "camps_buits": "⚠️ Rellened todos los campos obligatorios (Lwl, Bc y T) antes de calcular.",
     },
     "EN": {
@@ -328,8 +328,8 @@ if st.button(T_["calcular"], use_container_width=True):
 
     if mLDC <= 0:
         import urllib.parse
-        assumpte = urllib.parse.quote(T_["email_assumpte"])
-        cos = urllib.parse.quote(T_["email_cos"].format(lwl=Lwl, bc=Bc, t=T, tipus=tipus))
+        assumpte = urllib.parse.quote(T_["email_assumpte"], safe='', encoding='utf-8')
+        cos = urllib.parse.quote(T_["email_cos"].format(lwl=Lwl, bc=Bc, t=T, tipus=tipus), safe='\n', encoding='utf-8')
         mailto = f"https://mail.google.com/mail/?view=cm&to=puntals.varada@gmail.com&su={assumpte}&body={cos}"
         st.markdown(f"""
         <div style="background:rgba(180,30,30,0.12); border:1px solid rgba(210,60,60,0.3);
