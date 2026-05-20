@@ -233,7 +233,7 @@ TEXTOS = {
         "reportar": "Reportar este error al gestor de la app",
         "email_assumpte": "Error Calculadora Puntales - Datos fuera de rango",
         "email_cos": "Buenos d\u00edas,\n\nSe ha producido un error al introducir los siguientes datos:\n- Lwl = {lwl:.2f} m\n- Bc = {bc:.2f} m\n- T = {t:.2f} m\n- Tipo: {tipus}\n\nMensaje: mLDC <= 0 (fuera del rango ISO 12215-5)\n\nGracias.",
-        "camps_buits": "⚠️ Rellened todos los campos obligatorios (Lwl, Bc y T) antes de calcular.",
+        "camps_buits": "⚠️ Rellene todos los campos obligatorios (Lwl, Bc y T) antes de calcular.",
         "btn_guia": "📄 Descargar guía de los cálculos (PDF)",
         "pdf_nom": "guia_calculs_ES.pdf",
     },
