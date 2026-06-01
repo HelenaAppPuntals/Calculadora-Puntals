@@ -148,7 +148,7 @@ html, body, [class*="css"] {
     border: 1px solid rgba(50,110,190,0.1) !important;
     border-top: none !important;
     border-radius: 0 0 10px 10px !important;
-    color: #e8f4ff !important;
+    color: #c8dff5 !important;
     font-size: 0.83rem !important;
 }
 
@@ -405,7 +405,7 @@ if st.button(T_["calcular"], use_container_width=True):
     N_TFG = math.ceil((Delta*9.81*eta) / F_limit)
     N_TFM = math.ceil((Delta*9.81*eta + terme_vent) / F_limit)
     Delta_N = N_TFM - N_TFG
-    d_min   = M_w / (F_limit * (N_TFM / 2))
+    d_min   = M_w / (F_limit * (N_TFM / 2)) + 0.5
     B_mig   = Bc / 2
     ok_geom = d_min <= B_mig
 
