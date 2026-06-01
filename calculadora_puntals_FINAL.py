@@ -467,23 +467,26 @@ if st.button(T_["calcular"], use_container_width=True):
     # ── DETALL TECNIC ──
     with st.expander(T_["detall"]):
         ca, cb = st.columns(2)
+        COLOR = "#7ec8e3"
         with ca:
-            st.markdown("**ISO 12215-5**")
-            for k, v in {"mLDC (kg)": f"{mLDC:,.0f}", "b=l (m)": f"{b:.3f}",
-                         "V (kn)": f"{V:.3f}", "nCG": f"{nCG:.4f}",
-                         "KL": f"{KL:.4f}", "KAR": f"{KAR:.4f}",
-                         "P_disseny (N/m2)": f"{P_disseny:.2f}",
-                         "F_limit (N)": f"{F_limit:,.0f}",
-                         "Delta (kg)": f"{Delta:,.0f}"}.items():
-                st.markdown(f"- **{k}**: {v}")
+            st.markdown(f"<span style='color:{COLOR};font-weight:700;'>ISO 12215-5</span>", unsafe_allow_html=True)
+            items_ca = {"mLDC (kg)": f"{mLDC:,.0f}", "b=l (m)": f"{b:.3f}",
+                        "V (kn)": f"{V:.3f}", "nCG": f"{nCG:.4f}",
+                        "KL": f"{KL:.4f}", "KAR": f"{KAR:.4f}",
+                        "P_disseny (N/m2)": f"{P_disseny:.2f}",
+                        "F_limit (N)": f"{F_limit:,.0f}",
+                        "Delta (kg)": f"{Delta:,.0f}"}
+            rows_ca = "".join([f"<li><span style='color:{COLOR};font-weight:600;'>{k}</span><span style='color:#b8d8ea;'>: {v}</span></li>" for k, v in items_ca.items()])
+            st.markdown(f"<ul style='color:{COLOR};line-height:2;'>{rows_ca}</ul>", unsafe_allow_html=True)
         with cb:
-            st.markdown("**IAP-11**")
-            for k, v in {"v_b(T) (m/s)": f"{v_bT:.3f}", "c_prob": f"{c_prob:.5f}",
-                         "H_exp (m)": f"{H_exp:.3f}", "A_ref (m2)": f"{A_ref:.3f}",
-                         "ce(z)": f"{ce:.4f}", "F_w (N)": f"{F_w:,.0f}",
-                         "M_w (N·m)": f"{M_w:,.0f}",
-                         "2·M_w/B (N)": f"{terme_vent:,.0f}"}.items():
-                st.markdown(f"- **{k}**: {v}")
+            st.markdown(f"<span style='color:{COLOR};font-weight:700;'>IAP-11</span>", unsafe_allow_html=True)
+            items_cb = {"v_b(T) (m/s)": f"{v_bT:.3f}", "c_prob": f"{c_prob:.5f}",
+                        "H_exp (m)": f"{H_exp:.3f}", "A_ref (m2)": f"{A_ref:.3f}",
+                        "ce(z)": f"{ce:.4f}", "F_w (N)": f"{F_w:,.0f}",
+                        "M_w (N·m)": f"{M_w:,.0f}",
+                        "2·M_w/B (N)": f"{terme_vent:,.0f}"}
+            rows_cb = "".join([f"<li><span style='color:{COLOR};font-weight:600;'>{k}</span><span style='color:#b8d8ea;'>: {v}</span></li>" for k, v in items_cb.items()])
+            st.markdown(f"<ul style='color:{COLOR};line-height:2;'>{rows_cb}</ul>", unsafe_allow_html=True)
 
 # ── FOOTER ──
 st.markdown(f"<div class='footer'>{T_['footer']}</div>", unsafe_allow_html=True)
