@@ -148,7 +148,7 @@ html, body, [class*="css"] {
     border: 1px solid rgba(50,110,190,0.1) !important;
     border-top: none !important;
     border-radius: 0 0 10px 10px !important;
-    color: #9abce0 !important;
+    color: #e8f4ff !important;
     font-size: 0.83rem !important;
 }
 
@@ -197,7 +197,7 @@ TEXTOS = {
         "error_rang": "Dades fora de rang — Amb Lwl = {lwl:.2f} m, la massa de desplaçament estimada per la ISO 12215-5 (mLDC = 1369·Lwl - 7223.1) resulta zero o negativa. La normativa requereix una eslora minima d'aproximadament 5.27 m per poder aplicar aquesta metodologia. Reviseu les dades introduides.",
         "reportar": "Reportar aquest error al gestor de l'app",
         "email_assumpte": "Error Calculadora Puntals - Dades fora de rang",
-        "email_cos": "Bon dia,\n\nS'ha produ\u00eft un error en introduir les dades seg\u00fcents:\n- Lwl = {lwl:.2f} m\n- Bc = {bc:.2f} m\n- T = {t:.2f} m\n- Tipus: {tipus}\n\nMissatge: mLDC <= 0 (fora del rang ISO 12215-5)\n\nGr\u00e0cies.",
+        "email_cos": "Bon dia,\n\nS'ha produït un error en introduir les dades següents:\n- Lwl = {lwl:.2f} m\n- Bc = {bc:.2f} m\n- T = {t:.2f} m\n- Tipus: {tipus}\n\nMissatge: mLDC <= 0 (fora del rang ISO 12215-5)\n\nGràcies.",
         "camps_buits": "⚠️ Ompliu tots els camps obligatoris (Lwl, Bc i T) abans de calcular.",
         "btn_guia": "📄 Descarregar guia dels càlculs (PDF)",
         "pdf_nom": "guia_calculs_CA.pdf",
@@ -232,7 +232,7 @@ TEXTOS = {
         "error_rang": "Datos fuera de rango — Con Lwl = {lwl:.2f} m, la masa de desplazamiento estimada por la ISO 12215-5 (mLDC = 1369·Lwl - 7223.1) resulta cero o negativa. La normativa requiere una eslora minima de aproximadamente 5.27 m para aplicar esta metodologia. Revisad los datos introducidos.",
         "reportar": "Reportar este error al gestor de la app",
         "email_assumpte": "Error Calculadora Puntales - Datos fuera de rango",
-        "email_cos": "Buenos d\u00edas,\n\nSe ha producido un error al introducir los siguientes datos:\n- Lwl = {lwl:.2f} m\n- Bc = {bc:.2f} m\n- T = {t:.2f} m\n- Tipo: {tipus}\n\nMensaje: mLDC <= 0 (fuera del rango ISO 12215-5)\n\nGracias.",
+        "email_cos": "Buenos días,\n\nSe ha producido un error al introducir los siguientes datos:\n- Lwl = {lwl:.2f} m\n- Bc = {bc:.2f} m\n- T = {t:.2f} m\n- Tipo: {tipus}\n\nMensaje: mLDC <= 0 (fuera del rango ISO 12215-5)\n\nGracias.",
         "camps_buits": "⚠️ Rellene todos los campos obligatorios (Lwl, Bc y T) antes de calcular.",
         "btn_guia": "📄 Descargar guía de los cálculos (PDF)",
         "pdf_nom": "guia_calculs_ES.pdf",
@@ -458,7 +458,7 @@ if st.button(T_["calcular"], use_container_width=True):
         {T_['correcte'] if ok_geom else T_['atencio']}
     </div>
     <div style="background:rgba(0,35,90,0.3); border:1px solid rgba(50,110,220,0.16);
-                border-radius:10px; padding:14px 18px; color:#90b8e0;
+                border-radius:10px; padding:14px 18px; color:#e8f4ff;
                 font-size:0.83rem; line-height:1.6; margin-bottom:8px;">
         {T_['recomanacio'].format(dmin=d_min, bmig=B_mig)}
     </div>
