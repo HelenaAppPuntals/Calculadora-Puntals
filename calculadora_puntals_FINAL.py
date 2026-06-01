@@ -148,7 +148,7 @@ html, body, [class*="css"] {
     border: 1px solid rgba(50,110,190,0.1) !important;
     border-top: none !important;
     border-radius: 0 0 10px 10px !important;
-    color: #c8dff5 !important;
+    color: #eaf4ff !important;
     font-size: 0.83rem !important;
 }
 
@@ -458,7 +458,7 @@ if st.button(T_["calcular"], use_container_width=True):
         {T_['correcte'] if ok_geom else T_['atencio']}
     </div>
     <div style="background:rgba(0,35,90,0.3); border:1px solid rgba(50,110,220,0.16);
-                border-radius:10px; padding:14px 18px; color:#e8f4ff;
+                border-radius:10px; padding:14px 18px; color:#eaf4ff;
                 font-size:0.83rem; line-height:1.6; margin-bottom:8px;">
         {T_['recomanacio'].format(dmin=d_min, bmig=B_mig)}
     </div>
